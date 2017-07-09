@@ -301,7 +301,6 @@ function Pager(listName, itemsPerPage) {
         this.pages = Math.ceil(records / itemsPerPage);
     }
 
-
     this.showPageNav = function (a, b) {
         var element = document.getElementById("page-nav-position");
         var pagerHtml = '<a onclick="pager.prev();" class="pg-normal">&laquo;</a>';
@@ -317,8 +316,7 @@ function Pager(listName, itemsPerPage) {
 
 var pager = new Pager('page-list-elem', 5);
 
-
-document.addEventListener("DOMContentLoaded", function () {
+window.addEventListener("load", function () {
     pager.init();
     pager.showPage(1);
 });
