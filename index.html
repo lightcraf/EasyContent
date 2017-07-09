@@ -1,0 +1,242 @@
+﻿<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <title>EasyContent</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Enjoy the videos and books you love, upload original content, and share it all with friends">
+    <meta name="keywords" content="video, sharing, book, free, upload">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/earth.png" type="image/png" sizes="16x16">
+    <link rel="stylesheet" href="styles.css" />
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web:300,700" rel="stylesheet">
+</head>
+<body role="document">
+    <header>
+        <nav class="top-nav" role="navigation">
+            <h1 class="logo"><a href="index.html"><img src="images/dp1-design.png" alt="dp1-design-logo" title="DP1 Design" /></a></h1>
+            <div class="top-menu-icon"></div>
+            <ul id="show-top-nav" class="top-nav-list">
+                <li><a href="#" class="nav-link">About</a></li>
+                <li class="dropdown">
+                    <a href="#" class="nav-link">Content <span class="caret"></span></a>
+                    <div class="dropdown-content">
+                        <a href="#">Movies</a>
+                        <a href="#">Books</a>
+                        <a href="#">Coming Soon</a>
+                        <a href="#">Most Popular</a>
+                    </div>
+                </li>
+                <li><a href="#" class="nav-link">Forum</a></li>
+                <li><a href="#map" id="js-show-map" class="nav-link">Contact</a></li>
+                <li><a href="#" id="sign-in" class="nav-link">Sign In</a></li>
+                <li><a href="#" id="sign-up" class="nav-link nav-link-margin">Sign Up</a></li>
+                <li><a href="#" id="sign-out" class="nav-link">Sign Out</a></li>
+                <li class="welcome-user"></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="slideshow-container">
+        <div class="slides-container">
+            <div class="slides fade">
+                <img src="images/slide-1.jpg" alt="building">
+            </div>
+            <div class="slides fade">
+                <img src="images/slide-2.jpg" alt="forest">
+            </div>
+            <div class="slides fade">
+                <img src="images/slide-3.jpg" alt="bark of tree">
+            </div>
+            <div class="slides fade">
+                <img src="images/slide-4.jpg" alt="wood">
+            </div>
+            <a class="slide-prev">&#10094;</a>
+            <a class="slide-next">&#10095;</a>
+        </div>
+        <div class="slide-list">
+            <span class="slide" data-slide-to="1"></span>
+            <span class="slide" data-slide-to="2"></span>
+            <span class="slide" data-slide-to="3"></span>
+            <span class="slide" data-slide-to="4"></span>
+        </div>
+    </div>
+
+    <main class="main" role="main">
+        <div class="row">
+            <nav class="col-2 left-menu">
+                <h2>Menu</h2>
+
+                <ul class="left-menu-list">
+                    <li><a href="#" id="all-content" class="left-menu-item">All content</a></li>
+                    <li><a href="#" id="js-show-video-genre" class="left-menu-item">Movies <span class="caret"></span></a></li>
+                    <li>
+                        <ul id="js-hidden-video-list" class="left-menu-hide">
+                            <li><a href="#" id="all-videos" class="left-menu-item">All</a></li>
+                            <li><a href="#" id="video-action" class="left-menu-item">Action</a></li>
+                            <li><a href="#" id="video-drama" class="left-menu-item">Drama</a></li>
+                            <li><a href="#" id="video-sci-fi" class="left-menu-item">Sci-fi</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#" id="js-show-book-genre" class="left-menu-item">Books <span class="caret"></span></a></li>
+                    <li>
+                        <ul id="js-hidden-book-list" class="left-menu-hide">
+                            <li><a href="#" id="all-books" class="left-menu-item">All</a></li>
+                            <li><a href="#" id="book-cookbooks" class="left-menu-item">Cookbooks</a></li>
+                            <li><a href="#" id="book-history" class="left-menu-item">History</a></li>
+                            <li><a href="#" id="book-romance" class="left-menu-item">Romance</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#" id="show-upload" class="left-menu-item upload-link">Upload</a></li>
+                </ul>
+
+                <div class="search" role="search">
+                    <input type="search" id="search-content" placeholder="Search" title="Search"><br />
+                    <input id="search-everywhere" type="radio" name="search" checked />
+                    <label for="search-everywhere"><span></span>everywhere</label><br />
+                    <input id="search-title" type="radio" name="search" />
+                    <label for="search-title"><span></span>in title</label><br />
+                    <input id="search-desc" type="radio" name="search" />
+                    <label for="search-desc"><span></span>in description</label>
+                </div>
+
+                <div class="sort" role="search">
+                    Sort by <select id="sort-list">
+                        <option value=""></option>
+                        <option value="title">Title</option>
+                        <option value="rating">Rating</option>
+                        <option value="votes">Votes</option>
+                    </select>
+                </div>
+            </nav>
+            <section id="root" class="col-10 content-wrapper" aria-live="polite"></section>
+        </div>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <div id="map"></div>
+        <div class="row">
+            <div class="col-4">
+                <h3>Company</h3>
+                <ul class="footer-link-wrapper">
+                    <li><a href="#" class="footer-link">About us</a></li>
+                    <li><a href="#" class="footer-link">Our services</a></li>
+                    <li><a href="#" class="footer-link">Contacts</a></li>
+                    <li><a href="#" class="footer-link">Help</a></li>
+                </ul>
+            </div>
+            <div class="col-4">
+                <h3>Contact</h3>
+                <ul class="footer-link-wrapper">
+                    <li><a href="mailto:someone@example.com" class="footer-link">someone@example.com</a></li>
+                    <li><a href="tel:+38006244578" rel="nofollow" class="footer-link">+3-800-624-4578</a></li>
+                </ul>
+                <ul class="icon-wrapper">
+                    <li><a href="#" class="icon-link icon-link-facebook" target="_blank" title="Follow on Facebook">Facebook</a></li>
+                    <li><a href="#" class="icon-link icon-link-twitter" target="_blank" title="Follow on Twitter">Twitter</a></li>
+                    <li><a href="#" class="icon-link icon-link-google" target="_blank" title="Follow on Google Plus">Google Plus</a></li>
+                    <li><a href="#" class="icon-link icon-link-pinterest" target="_blank" title="Follow on Pinterest">Pinterest</a></li>
+                </ul>
+            </div>
+            <div class="col-4">
+                <h3>Adress</h3>
+                <p class="footer-adress">
+                    101 The Amazing Road <br />
+                    Privier Building <br />
+                    Manhattan<br />
+                    400105
+                </p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>Copyright 2017 Criflan Design Inc. All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <div class="sign-up-modal" role="form">
+        <form id="form-sign-up" class="modal-content">
+            <label for="username">Username</label>
+            <input type="text" placeholder="Pick a username" id="username" name="username" required>
+
+            <label for="useremail">Email</label>
+            <input type="email" placeholder="Your email address" id="useremail" name="email"
+                   pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+                   autocomplete="off" required>
+
+            <label for="userpassword">Password</label>
+            <input type="password" placeholder="Create a password" id="userpassword" name="password" required>
+
+            <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+
+            <div class="modal-clearfix">
+                <button type="submit" class="form-btn signup-btn">Sign Up</button>
+                <button type="button" class="form-btn cancel-btn">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="sign-in-modal" role="form">
+        <form id="form-sign-in" class="modal-content">
+            <label for="signin-name">Username</label>
+            <input type="text" id="signin-name" name="username" required>
+
+            <label for="signin-password">Password <a href="#" class="label-link">Forgot password?</a></label>
+            <input type="password" id="signin-password" name="password" required>
+
+            <div class="modal-clearfix">
+                <button type="submit" class="form-btn signup-btn">Sign In</button>
+                <button type="button" class="form-btn cancel-btn">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="show-upload-form" class="upload-wrapper" role="form">
+        <a href="#" id="close-upload-btn-1" class="close-upload">&times;</a>
+        <form class="upload-form">
+            <fieldset>
+                <legend>ADD NEW ITEM</legend>
+                <label for="item-title">Title</label>
+                <input type="text" id="item-title" maxlength="110" title="The maximum length of this field is 110 characters" required />
+
+                <label for="item-type">Type</label>
+                <select id="item-type">
+                    <optgroup label="Video">
+                        <option value="action">Action</option>
+                        <option value="drama">Drama</option>
+                        <option value="sci-fi">Sci-fi</option>
+                    </optgroup>
+                    <optgroup label="Book">
+                        <option value="cookbooks">Cookbooks</option>
+                        <option value="history">History</option>
+                        <option value="romance">Romance</option>
+                    </optgroup>
+                </select>
+
+                <label for="item-description">Description</label>
+                <textarea id="item-description" maxlength="1000" title="The maximum length of this field is 1000 characters" required></textarea>
+
+                <label for="item-main-img">Main image URL</label>
+                <input type="url" id="img-url-1" class="img-upload" pattern="^https?:\/\/.+\.(jpg|gif|png|jpeg|tiff|pdf|bmp)$"
+                       title='URL must start with "http://" or "https://" and end with jpeg, jpg, png, gif, bmp or tiff' required />
+
+                <label for="img2">Image URL</label>
+                <input type="url" id="img-url-2" class="img-upload" pattern="^https?:\/\/.+\.(jpg|gif|png|jpeg|tiff|pdf|bmp)$"
+                       title='URL must start with "http://" or "https://" and end with jpeg, jpg, png, gif, bmp or tiff' required />
+
+                <label for="img3">Image URL</label>
+                <input type="url" id="img-url-3" class="img-upload" pattern="^https?:\/\/.+\.(jpg|gif|png|jpeg|tiff|pdf|bmp)$"
+                       title='URL must start with "http://" or "https://" and end with jpeg, jpg, png, gif, bmp or tiff' required />
+
+                <div class="modal-clearfix">
+                    <button type="submit" id="submitdata" class="upload-form-btn upload-btn">Upload</button>
+                    <button type="button" id="close-upload-btn-2" class="upload-form-btn upload-cancel-btn">Cancel</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq4VkK29tziDbYWc1rrq5PsCjaFDsmvFM&callback=initMap">
+    </script>
+</body>
+</html>
