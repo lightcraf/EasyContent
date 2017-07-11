@@ -33,14 +33,15 @@
             });
         }
     }
+    
 
     // vote
     document.getElementById("root").addEventListener("click", function (event) {
-        var index = event.target.id.replace("vote-btn-", "");
-        var sel = document.getElementById("select-rating-" + index);
-        var ratingVal = sel.options[sel.selectedIndex].value;
-
         if (event.target && event.target.nodeName == "BUTTON") {
+            var index = event.target.id.replace("vote-btn-", "");
+            var sel = document.getElementById("select-rating-" + index);
+            var ratingVal = sel.options[sel.selectedIndex].value;
+            
             dataArray[index].rating.ratingCount = parseInt(dataArray[index].rating.ratingCount) + 1;
             dataArray[index].rating.ratingSum = parseInt(dataArray[index].rating.ratingSum) + parseInt(ratingVal);
             dataArray[index].rating.ratingValue = (dataArray[index].rating.ratingSum / dataArray[index].rating.ratingCount).toFixed(1);
@@ -115,6 +116,7 @@
         setThumb();
     });
 
+    
     document.getElementsByClassName("left-menu-list")[0].addEventListener("click", function (event) {
         event.preventDefault();
         switch (event.target.id) {
@@ -147,6 +149,7 @@
                 break;
         }
     });
+    
 
     function filterArray(filterParameter) {
         var newDataArray;
@@ -170,6 +173,7 @@
         setThumb();
     }
 
+    
     function loadContentArray(arr) {
         var out = '';
 
@@ -231,6 +235,7 @@
     loadContent();
 
 })();
+
 
 function Pager(listName, itemsPerPage) {
     this.listName = listName;
@@ -336,6 +341,7 @@ document.getElementById("close-upload-btn-1").addEventListener("click", function
     document.getElementById("show-upload-form").style.width = "0";
 });
 
+
 // hide or show sign-up and login form 
 (function () {
     var signUpModal = document.getElementsByClassName("sign-up-modal")[0];
@@ -369,6 +375,7 @@ document.getElementById("close-upload-btn-1").addEventListener("click", function
     });
 })();
 
+
 // hide or show filter list
 document.getElementsByClassName("left-menu-list")[0].addEventListener("click", function (event) {
     event.preventDefault();
@@ -389,10 +396,12 @@ document.getElementsByClassName("left-menu-list")[0].addEventListener("click", f
     }
 });
 
+
 // show top navigation
 document.getElementsByClassName("top-menu-icon")[0].addEventListener("click", function () {
     document.getElementById("show-top-nav").classList.toggle("top-nav-list");
 });
+
 
 // slider
 (function () {
@@ -435,6 +444,7 @@ document.getElementsByClassName("top-menu-icon")[0].addEventListener("click", fu
     }
 })();
 
+
 // sign-out
 document.getElementById("sign-out").addEventListener("click", function () {
     var welcomeUser = document.getElementsByClassName("welcome-user")[0];
@@ -445,6 +455,7 @@ document.getElementById("sign-out").addEventListener("click", function () {
     welcomeUser.style.display = "none";
     welcomeUser.innerHTML = "";
 });
+
 
 // sign-up form
 document.getElementById("form-sign-up").addEventListener("submit", function (event) {
@@ -499,6 +510,7 @@ document.getElementById("form-sign-up").addEventListener("submit", function (eve
     xmlhttp.send();
 });
 
+
 // login form
 document.getElementById("form-sign-in").addEventListener("submit", function (event) {
     event.preventDefault();
@@ -536,6 +548,7 @@ document.getElementById("form-sign-in").addEventListener("submit", function (eve
     xmlhttp.overrideMimeType('application/json');
     xmlhttp.send();
 });
+
 
 // search in content
 document.getElementById("search-content").addEventListener("keyup", function (event) {
@@ -603,6 +616,7 @@ document.getElementById("search-content").addEventListener("keyup", function (ev
     pager.showPage(1);
 });
 
+
 // filter content
 document.getElementById("sort-list").addEventListener("change", function () {
     var switching = true;
@@ -648,6 +662,7 @@ document.getElementById("sort-list").addEventListener("change", function () {
     pager.showPage(1);
 });
 
+
 function initMap() {
     var office = { lat: 40.768029, lng: -73.981847 };
     var map = new google.maps.Map(document.getElementById('map'), {
@@ -660,6 +675,7 @@ function initMap() {
         map: map
     });
 }
+
 
 // hide or show map
 document.getElementById("js-show-map").addEventListener("click", function (event) {
