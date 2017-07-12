@@ -65,7 +65,7 @@
             images: {},
             rating: {}
         };
-        var imgPattern = /^https?:\/\/.+\.(jpg|gif|png|jpeg|tiff|pdf|bmp)$/;
+        var imgPattern = /^https?:\/\/.+\.(jpg|gif|png|jpeg|tiff|bmp)$/;
         var imgArray = document.getElementsByClassName("img-upload");
         var itemTitle = document.getElementById("item-title").value;
         var itemDescription = document.getElementById("item-description").value;
