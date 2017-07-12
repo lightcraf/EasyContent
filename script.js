@@ -75,6 +75,7 @@
             if (imgPattern.test(imgArray[i].value)) {
                 continue;
             } else {
+                event.preventDefault();
                 return;
             }
         }
@@ -82,12 +83,16 @@
         if (itemTitle.length != "" && itemTitle.length <= 110) {
             newContentItem.title = itemTitle;
         } else {
+            document.getElementsByClassName("error-1")[0].style.display = "block";
+            event.preventDefault();
             return;
         }
 
         if (itemDescription.length != 0 && itemDescription.length <= 1000) {
             newContentItem.description = itemDescription;
         } else {
+            document.getElementsByClassName("error-2")[0].style.display = "block";
+            event.preventDefault();
             return;
         }
 
