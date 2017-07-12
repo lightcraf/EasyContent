@@ -1349,6 +1349,11 @@ ul {
         color: black;
     }
 
+.error-1, .error-2 {
+    display: none;
+    color: red;
+}
+
 .upload-wrapper {
     height: 100%;
     width: 0;
