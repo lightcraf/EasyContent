@@ -1,8 +1,8 @@
 ﻿<!DOCTYPE html>
-<html lang="en-us">
+<html lang="en-US">
 <head>
     <title>EasyContent</title>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="description" content="Enjoy the videos and books you love, upload original content, and share it all with friends">
     <meta name="keywords" content="video, sharing, book, free, upload">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,12 +13,14 @@
 <body role="document">
     <header>
         <nav class="top-nav" role="navigation">
-            <h1 class="logo"><a href="index.html"><img src="images/dp1-design.png" alt="dp1-design-logo" title="DP1 Design" /></a></h1>
+            <h1 class="logo">
+                <a href="index.html"><img src="images/dp1-design.png" alt="dp1-design-logo" title="DP1 Design" /></a>
+            </h1>
             <div class="top-menu-icon"></div>
             <ul id="show-top-nav" class="top-nav-list">
                 <li><a href="#" class="nav-link">About</a></li>
                 <li class="dropdown">
-                    <a href="#" class="nav-link">Content <span class="caret"></span></a>
+                    <a href="#" class="nav-link caret-nav">Content</a>
                     <div class="dropdown-content">
                         <a href="#">Movies</a>
                         <a href="#">Books</a>
@@ -28,10 +30,8 @@
                 </li>
                 <li><a href="#" class="nav-link">Forum</a></li>
                 <li><a href="#map" id="js-show-map" class="nav-link">Contact</a></li>
-                <li><a href="#" id="sign-in" class="nav-link">Sign In</a></li>
-                <li><a href="#" id="sign-up" class="nav-link nav-link-margin">Sign Up</a></li>
-                <li><a href="#" id="sign-out" class="nav-link">Sign Out</a></li>
-                <li class="welcome-user"></li>
+                <li id="sign-in-list-item"><a href="#" id="sign-in" class="nav-link">Sign In</a></li>
+                <li id="sign-up-list-item"><a href="#" id="sign-up" class="nav-link">Sign Up</a></li>
             </ul>
         </nav>
     </header>
@@ -49,8 +49,8 @@
             <div class="slides fade">
                 <img src="images/slide-4.jpg" alt="wood">
             </div>
-            <a class="slide-prev">&#10094;</a>
-            <a class="slide-next">&#10095;</a>
+            <span class="slide-prev">&#10094;</span>
+            <span class="slide-next">&#10095;</span>
         </div>
         <div class="slide-list">
             <span class="slide" data-slide-to="1"></span>
@@ -64,10 +64,9 @@
         <div class="row">
             <nav class="col-2 left-menu">
                 <h2>Menu</h2>
-
                 <ul class="left-menu-list">
                     <li><a href="#" id="all-content" class="left-menu-item">All content</a></li>
-                    <li><a href="#" id="js-show-video-genre" class="left-menu-item">Movies <span class="caret"></span></a></li>
+                    <li><a href="#" id="js-show-video-genre" class="left-menu-item caret">Movies</a></li>
                     <li>
                         <ul id="js-hidden-video-list" class="left-menu-hide">
                             <li><a href="#" id="all-videos" class="left-menu-item">All</a></li>
@@ -76,7 +75,7 @@
                             <li><a href="#" id="video-sci-fi" class="left-menu-item">Sci-fi</a></li>
                         </ul>
                     </li>
-                    <li><a href="#" id="js-show-book-genre" class="left-menu-item">Books <span class="caret"></span></a></li>
+                    <li><a href="#" id="js-show-book-genre" class="left-menu-item caret">Books</a></li>
                     <li>
                         <ul id="js-hidden-book-list" class="left-menu-hide">
                             <li><a href="#" id="all-books" class="left-menu-item">All</a></li>
@@ -107,13 +106,16 @@
                     </select>
                 </div>
             </nav>
-            <section id="root" class="col-10 content-wrapper" aria-live="polite"></section>
+            <section id="root" class="col-10 main-content-wrapper" aria-live="polite"></section>
         </div>
     </main>
 
     <footer class="footer" role="contentinfo">
-        <div id="map"></div>
-        <div class="row">
+        <div class="map-wrapper">
+            <span class="close-map">&times;</span>
+            <div id="map"></div>
+        </div>
+        <div class="row footer-wrapper">
             <div class="col-4">
                 <h3>Company</h3>
                 <ul class="footer-link-wrapper">
