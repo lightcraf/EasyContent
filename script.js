@@ -21,6 +21,7 @@
         xmlhttp.send();
     }
 
+
     // thumbs gallery
     function setThumb() {
         var thumbItems = document.getElementsByClassName("js-thumb-items");
@@ -33,7 +34,7 @@
             });
         }
     }
-    
+
 
     // vote
     document.getElementById("root").addEventListener("click", function (event) {
@@ -41,7 +42,7 @@
             var index = event.target.id.replace("vote-btn-", "");
             var sel = document.getElementById("select-rating-" + index);
             var ratingVal = sel.options[sel.selectedIndex].value;
-            
+
             dataArray[index].rating.ratingCount = parseInt(dataArray[index].rating.ratingCount) + 1;
             dataArray[index].rating.ratingSum = parseInt(dataArray[index].rating.ratingSum) + parseInt(ratingVal);
             dataArray[index].rating.ratingValue = (dataArray[index].rating.ratingSum / dataArray[index].rating.ratingCount).toFixed(1);
@@ -59,13 +60,14 @@
         }
     });
 
+
     // upload new content
     document.getElementsByClassName("upload-form")[0].addEventListener("submit", function (event) {
         var newContentItem = {
             images: {},
             rating: {}
         };
-        var imgPattern = /^https?:\/\/.+\.(jpg|gif|png|jpeg|tiff|bmp)$/;
+        var imgPattern = /^https?:\/\/.+\.(jpg|gif|png|jpeg|tiff|pdf|bmp)$/;
         var imgArray = document.getElementsByClassName("img-upload");
         var itemTitle = document.getElementById("item-title").value;
         var itemDescription = document.getElementById("item-description").value;
@@ -75,8 +77,7 @@
             if (imgPattern.test(imgArray[i].value)) {
                 continue;
             } else {
-                event.preventDefault();
-                return;
+                return false;
             }
         }
 
@@ -86,7 +87,7 @@
         } else {
             document.getElementsByClassName("error-1")[0].style.display = "block";
             event.preventDefault();
-            return;
+            return false;
         }
 
         if (itemDescription.length != 0 && itemDescription.length <= 1000) {
@@ -95,7 +96,7 @@
         } else {
             document.getElementsByClassName("error-2")[0].style.display = "block";
             event.preventDefault();
-            return;
+            return false;
         }
 
         newContentItem.genre = selectedType.value;
@@ -123,7 +124,7 @@
         setThumb();
     });
 
-    
+
     document.getElementsByClassName("left-menu-list")[0].addEventListener("click", function (event) {
         event.preventDefault();
         switch (event.target.id) {
@@ -156,7 +157,7 @@
                 break;
         }
     });
-    
+
 
     function filterArray(filterParameter) {
         var newDataArray;
@@ -180,13 +181,13 @@
         setThumb();
     }
 
-    
+
     function loadContentArray(arr) {
         var out = '';
 
         for (var i = 0; i < arr.length; i++) {
             out += '<article class="row content page-list-elem">' +
-                        '<div class="col-4">' +
+                        '<div class="col-4 thumbnail-wrapper">' +
                             '<div class="thumb-large">' +
                                 '<img id="largeImg-' + i + '" src="' + arr[i].images.url1 + '" alt="' + arr[i].title + '" title="' + arr[i].title + '"/>' +
                             '</div>' +
@@ -202,7 +203,7 @@
                                 '</li>' +
                             '</ul>' +
                         '</div>' +
-                        '<div class="col-8">' +
+                        '<div class="col-8 content-wrapper">' +
                             '<header>' +
                                 '<h2 id="' + arr[i].title + '" class="content-title">' + arr[i].title + '</h2>' +
                             '</header>' +
@@ -393,13 +394,13 @@ document.getElementsByClassName("left-menu-list")[0].addEventListener("click", f
     if (target.id == "js-show-video-genre") {
         videoGenreList.classList.toggle("left-menu-hide");
         videoGenreList.classList.toggle("left-menu-show");
-        target.firstElementChild.classList.toggle("caret");
-        target.firstElementChild.classList.toggle("caret-rotate");
+        target.classList.toggle("caret");
+        target.classList.toggle("caret-rotate");
     } else if (target.id == "js-show-book-genre") {
         bookGenreList.classList.toggle("left-menu-hide");
         bookGenreList.classList.toggle("left-menu-show");
-        target.firstElementChild.classList.toggle("caret");
-        target.firstElementChild.classList.toggle("caret-rotate");
+        target.classList.toggle("caret");
+        target.classList.toggle("caret-rotate");
     }
 });
 
@@ -414,6 +415,10 @@ document.getElementsByClassName("top-menu-icon")[0].addEventListener("click", fu
 (function () {
     var slideIndex = 1;
     showSlides(slideIndex);
+
+    setInterval(function () {
+        showSlides(slideIndex += 1);
+    }, 5000);
 
     document.getElementsByClassName("slideshow-container")[0].addEventListener("click", function (event) {
         var target = event.target;
@@ -452,15 +457,107 @@ document.getElementsByClassName("top-menu-icon")[0].addEventListener("click", fu
 })();
 
 
-// sign-out
-document.getElementById("sign-out").addEventListener("click", function () {
-    var welcomeUser = document.getElementsByClassName("welcome-user")[0];
+// get, set, unset cookie
+var CookieUtil = {
+    get: function (name) {
+        var cookieName = encodeURIComponent(name) + "=",
+            cookieStart = document.cookie.indexOf(cookieName),
+            cookieValue = null;
 
-    document.getElementById("sign-up").style.display = "";
-    document.getElementById("sign-in").style.display = "";
-    document.getElementById("sign-out").style.display = "none";
-    welcomeUser.style.display = "none";
-    welcomeUser.innerHTML = "";
+        if (cookieStart > -1) {
+            var cookieEnd = document.cookie.indexOf(";", cookieStart);
+            if (cookieEnd == -1) {
+                cookieEnd = document.cookie.length;
+            }
+            cookieValue = decodeURIComponent(document.cookie.substring(
+                cookieStart + cookieName.length, cookieEnd));
+        }
+
+        return cookieValue;
+    },
+
+    set: function (name, value, expires, path, domain, secure) {
+        var cookieText = encodeURIComponent(name) + "=" + encodeURIComponent(value);
+
+        if (expires instanceof Date) {
+            cookieText += "; expires=" + expires.toGMTString();
+        }
+
+        if (path) {
+            cookieText += "; path=" + path;
+        }
+
+        if (domain) {
+            cookieText += "; domain=" + domain;
+        }
+
+        if (secure) {
+            cookieText += "; secure";
+        }
+
+        document.cookie = cookieText;
+    },
+
+    unset: function (name, path, domain, secure) {
+        this.set(name, "", new Date(0), path, domain, secure);
+    }
+};
+
+
+// check cookie
+(function () {
+    var user = CookieUtil.get("name");
+    if (user != null) {
+        changeLoginNodes(user);
+    }
+})();
+
+// sign in or sign up
+function changeLoginNodes(userName) {
+    var list = document.getElementsByClassName("top-nav-list")[0];
+
+    var listItemSignIn = document.getElementById("sign-in-list-item");
+    listItemSignIn.parentNode.removeChild(listItemSignIn);
+
+    var listItemSignUp = document.getElementById("sign-up-list-item");
+    listItemSignUp.parentNode.removeChild(listItemSignUp);
+
+    var signOutNode = document.createElement("LI");
+    signOutNode.id = "sign-out-list-item";
+    signOutNode.innerHTML = '<a href="#" id="sign-out" class="nav-link">Sign Out</a>';
+    list.appendChild(signOutNode);
+
+    var welcomeNode = document.createElement("LI");
+    welcomeNode.className = "welcome-user";
+    welcomeNode.innerHTML = "Welcome <br> <span>" + userName + "<span>";
+    list.appendChild(welcomeNode);
+}
+
+// sign out
+document.getElementById("show-top-nav").addEventListener("click", function (event) {
+    if (event.target.id == "sign-out") {
+        var list = document.getElementsByClassName("top-nav-list")[0];
+
+        var listItemSignOut = document.getElementById("sign-out-list-item");
+        listItemSignOut.parentNode.removeChild(listItemSignOut);
+
+        var listItemWelcome = document.getElementsByClassName("welcome-user")[0];
+        listItemWelcome.parentNode.removeChild(listItemWelcome);
+
+        var signInNode = document.createElement("LI");
+        signInNode.id = "sign-in-list-item";
+        signInNode.innerHTML = '<a href="#" id="sign-in" class="nav-link">Sign In</a>';
+        list.appendChild(signInNode);
+
+        var signUpNode = document.createElement("LI");
+        signUpNode.id = "sign-up-list-item";
+        signUpNode.innerHTML = '<a href="#" id="sign-up" class="nav-link">Sign Up</a>';
+        list.appendChild(signUpNode);
+
+        CookieUtil.unset("name");
+    } else {
+        return false;
+    }
 });
 
 
@@ -479,27 +576,22 @@ document.getElementById("form-sign-up").addEventListener("submit", function (eve
                 var userEmail = document.getElementById("useremail").value;
                 var userPassword = document.getElementById("userpassword").value;
 
-                var welcomeUser = document.getElementsByClassName("welcome-user")[0];
                 var formData = {};
                 var emailPattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
 
                 if (emailPattern.test(userEmail)) {
                     formData.email = userEmail;
                 } else {
-                    return;
+                    return false;
                 }
 
                 formData.username = userName;
                 formData.password = userPassword;
 
-                document.getElementById("sign-up").style.display = "none";
-                document.getElementById("sign-in").style.display = "none";
-
-                document.getElementById("sign-out").style.display = "block";
-                welcomeUser.style.display = "block";
-                welcomeUser.innerHTML = "Welcome <br> <span>" + userName + "<span>";
-
                 dataUsers.push(formData);
+
+                CookieUtil.set("name", userName, new Date("January 1, 2018"));
+                changeLoginNodes(userName);
 
                 localStorage.setItem('usersLocalSt', JSON.stringify(dataUsers));
 
@@ -530,19 +622,14 @@ document.getElementById("form-sign-in").addEventListener("submit", function (eve
                 var dataUsers = JSON.parse(localStorage.getItem('usersLocalSt')) || users;
                 var signInName = document.getElementById("signin-name").value;
                 var signInPassword = document.getElementById("signin-password").value;
-                var welcomeUser = document.getElementsByClassName("welcome-user")[0];
 
                 for (var i = 0; i < dataUsers.length; i++) {
                     if (dataUsers[i].username == signInName && dataUsers[i].password == signInPassword) {
                         document.getElementsByClassName("sign-in-modal")[0].style.display = "none";
                         document.getElementById("form-sign-in").reset();
 
-                        document.getElementById("sign-up").style.display = "none";
-                        document.getElementById("sign-in").style.display = "none";
-
-                        document.getElementById("sign-out").style.display = "block";
-                        welcomeUser.style.display = "block";
-                        welcomeUser.innerHTML = "Welcome <br> <span>" + signInName + "<span>";
+                        CookieUtil.set("name", signInName, new Date("January 1, 2018"));
+                        changeLoginNodes(signInName);
                     }
                 }
             } else {
@@ -567,11 +654,8 @@ document.getElementById("search-content").addEventListener("keyup", function (ev
     var isTitleChecked = document.getElementById("search-title").checked;
     var isDescChecked = document.getElementById("search-desc").checked;
 
-    var resultsLength = document.getElementsByClassName("page-list-elem").length;
-    var noResults = document.getElementsByClassName("no-search-results")[0];
-
     if (!isEverywhereChecked && !isTitleChecked && !isDescChecked) {
-        return;
+        return false;
     }
 
     if (isTitleChecked) {
@@ -610,6 +694,9 @@ document.getElementById("search-content").addEventListener("keyup", function (ev
         }
     }
 
+    var resultsLength = document.getElementsByClassName("page-list-elem").length;
+    var noResults = document.getElementsByClassName("no-search-results")[0];
+
     if (resultsLength == 0) {
         noResults.style.display = "block";
         noResults.innerHTML = "No results found for " + input.value;
@@ -633,7 +720,7 @@ document.getElementById("sort-list").addEventListener("change", function () {
     var sortList;
 
     if (selectValue == "") {
-        return;
+        return false;
     } else if (selectValue == "rating") {
         sortList = document.getElementsByClassName("js-rating-sort");
     } else if (selectValue == "votes") {
@@ -686,13 +773,15 @@ function initMap() {
 
 // hide or show map
 document.getElementById("js-show-map").addEventListener("click", function (event) {
-    var map = document.getElementById("map");
-    if (map.style.display == "block") {
-        map.style.display = "none";
-    } else {
-        map.style.display = "block";
-    }
+    document.getElementsByClassName("map-wrapper")[0].style.display = "block";
     initMap();
+});
+
+document.getElementsByClassName("close-map")[0].addEventListener("click", function (event) {
+    var closeMapBtn = document.getElementsByClassName("map-wrapper")[0];
+    if (closeMapBtn.style.display == "block") {
+        closeMapBtn.style.display = "none";
+    }
 });
 
 
