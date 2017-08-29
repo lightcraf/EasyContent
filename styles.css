@@ -920,15 +920,18 @@ ul {
 .no-search-results {
     display: none;
     font-size: 20px;
+    word-wrap: break-word;
 }
 
 .content-title {
     color: white;
     font-weight: 300;
+    word-wrap: break-word;
 }
 
 .content-description {
     color: #AFAFAF;
+    word-wrap: break-word;
 }
 
 .see-more {
